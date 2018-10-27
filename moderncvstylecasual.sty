@@ -112,22 +112,25 @@
       \parbox[b]{\footerwidth}{%
         \centering%
         \color{color2}%
-        %\bfseries
-        \upshape{\ifthenelse{\isundefined{\@academtitlelong}}{}{\@academtitlelong~}{%
-            \@firstname~\@familyname%
-            \flushfooter\@firstfooterelementtrue%
+        % \bfseries
+        \vspace{-\baselineskip}
+        \strut{\upshape{%
+            \ifthenelse{\isundefined{\@academtitlelong}}{}{\@academtitlelong~}{%
+            \@firstname~\@familyname}\\%
+            %\flushfooter\@firstfooterelementtrue%
             % \\
           }}%
         \addressfont%
         \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
           \ifthenelse{\equal{\@addresscity}{}}{}{\addtofooter[~--~]{\@addresscity}}%
-          %\flushfooter
-          %\@firstfooterelementtrue%
+          \flushfooter
+          \@firstfooterelementtrue%
           \\
         }% if \addresstreet is defined, \addresscity will always be defined but could be empty
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}
             %\flushfooter
-          \\}}%
+            %\\
+          }}%
         \ifthenelse{\isundefined{\@phone}}{}{\addtofooter{\phonesymbol\@phone}}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofooter{\@extrainfo}}%
         \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter{\mobilesymbol\@mobile}}%
@@ -151,7 +154,7 @@
   % recompute lengths (in case we are switching from letter to resume, or vice versa)
   \recomputeletterlengths%
   % ensure footer with personal information
-  % \makeletterfooter% orgiginal
+  %\makeletterfooter% orgiginal
   \makecvfooter
   % sender block
   \begin{minipage}[t]{.5\textwidth}
@@ -198,10 +201,10 @@
         \ifthenelse{\isundefined{\@phone}}{}{\addtofooter{\phonesymbol\@phone}}%
         \ifthenelse{\isundefined{\@fax}}{}{\addtofooter{\faxsymbol\@fax}}%
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
-        	\ifthenelse{\isundefined{\@homepage}}{}{%
-	\ifthenelse{\equal{\@homepagetitle}{}}% \homepagetitle could be empty
-	{\addtofooter{\homepagesymbol\httplink{\@homepage}}}%
-	{\addtofooter{\homepagesymbol\httplink[\@homepagetitle]{\@homepage}}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{%
+          \ifthenelse{\equal{\@homepagetitle}{}}% \homepagetitle could be empty
+          {\addtofooter{\homepagesymbol\httplink{\@homepage}}}%
+          {\addtofooter{\homepagesymbol\httplink[\@homepagetitle]{\@homepage}}}}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofooter{\@extrainfo}}%
         \ifthenelse{\lengthtest{\footerboxwidth=0pt}}{}{\flushfooter}% the lengthtest is required to avoid flushing an empty footer, which could cause a blank line due to the \\ after the address, if no other personal info is used
         }}}%
